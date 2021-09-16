@@ -1,10 +1,22 @@
 #!/bin/python3
-import dataclasses
+
+#  DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+#                      Version 2, December 2004
+#
+#   Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
+#
+#   Everyone is permitted to copy and distribute verbatim or modified
+#   copies of this license document, and changing it is allowed as long
+#   as the name is changed.
+#
+#              DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+#     TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+#
+#    0. You just DO WHAT THE FUCK YOU WANT TO.
+
 import tkinter as tk
 import re
 import typing
-from time import sleep as s
-from threading import Thread
 from typing import TypedDict, Union
 from dataclasses import dataclass
 from tkinter import filedialog as fd
@@ -45,50 +57,28 @@ class DataConf:
             self.games.append(DataGame(**dict(game)))
 
 
-#
-# class jsonhints:
-#     """idk will look further later (or never)"""
-#     pass
-
-
 @dataclass
 class JsonSettings:
     def __init__(self, json: {} = None, path: str = None):
         self.__defaultjson = {
             'games': []
         }
-        #
-        # self.__json = {
-        #     'games': [
-        #
-        #     ]
-        # }
-        # self.games = self.__json['games']
         if path:
             self.load_json_from_file(path=path)
         elif json:
             self.load_json_from_dic(json=json)
         else:
             self.load_json_from_dic(json=self.__defaultjson)
-        #     Exception("fuck you")
+
 
     def load_json_from_dic(self, json: {}):
-        # self.__json = json
         self.reload_conf(json=json)
 
     def load_json_from_file(self, path: str):
         with open(path) as json_file:
-            # content = jload(json_file)
             json = jload(json_file)
-            # self.__json = jload(json_file)
         # Validation/Checking etc idc
-        # with open(path) as json_file:
-        #     print(jload(json_file))
-        # print(content)
-        # self.
         self.reload_conf(json=json)
-        # self.reload_conf()
-        # print(self.__json)
 
     def export_json_to_file(self, path: str):
 
@@ -98,18 +88,7 @@ class JsonSettings:
 
     def reload_conf(self, json: dict):
         """Recreate its configuration based on the dictionary converting it into a data class"""
-        # def reload_conf(self):
         self.conf = DataConf(**dict(json))
-        # self.games.clear()
-        # for game in self.__json['games']:
-        #     self.games.append(DataGame(**dict(game)))
-        # self.games.append(DataGame(**game))
-
-        # self.games[0].name = 'melty'
-        # self.games[0].highlighting[0].regex = 'battou'
-        # for x in self.games[0].highlighting[0].regex:
-        #     print()
-        pass
 
     def add_note(self, game, txt: str):
         pass
@@ -175,17 +154,7 @@ class zombie_window(tk.Toplevel, tk.Tk):
         # Create text widged
         self.text = tk.Text(self)
         self.text.insert(tk.INSERT, "Select a note first")
-        # self.text.pack(fill=tk.Y, expand=True)
-        # self.text.pack(filter=tk.X, expand=False)
-        # self.text.pack(expand=False)
         self.text.pack(fill=tk.X, side=tk.RIGHT, expand=True, anchor=tk.E)
-        # self.text.pack(fill=tk.BOTH)
-        # self.text_wd = tk.Text(self, height=2, width=30)
-        # self.text = tk.StringVar()
-        # self.text.set("Select a note first")
-        # self.label = tk.Label(self, textvariable=self.text, height=2)
-        # self.label.pack(fill=tk.Y)
-        # self.update()
 
     def update_text(self, text='', highlight: list = None) -> None:
         self.destroy_content()
@@ -258,7 +227,6 @@ class zombie_window(tk.Toplevel, tk.Tk):
 
 class Manager:
     def __init__(self, title="tk picker", jsonpath=None):
-        # self.json_conf: JsonSettings = JsonSettings(path='conf.json')
         self.json_conf: JsonSettings = JsonSettings(path=jsonpath)
         self.wd_title = title
 
@@ -283,7 +251,6 @@ class tk_menu(tk.Tk):
         self.conf_dir = str(Path.home())
         self.game_dic: dict[str:DataGame] = {}
         self.manager = manager
-        # self.update_game_dic()
         self.title(title)
         self.update()
         self.create_menu()
@@ -296,10 +263,7 @@ class tk_menu(tk.Tk):
     def create_menu(self):
         self.create_manage_conf_wd()
         if self.manager.json_conf.conf and len(self.manager.json_conf.conf.games) > 0:
-            # print('true')
             self.update_lists_wd()
-        # self.create_game_list_wd()
-        pass
 
     def create_manage_conf_wd(self):
         """Creates the load and save conf buttons"""
@@ -313,24 +277,20 @@ class tk_menu(tk.Tk):
             command=self.__save_conf)
         self.load_bt.pack(expand=True)
         self.save_bt.pack(expand=True)
-        # https: // www.pythontutorial.net / tkinter / tkinter - open - file - dialog /
+        # https://www.pythontutorial.net/tkinter/tkinter-open-file-dialog/
 
     def __load_conf(self):
         filetypes = (
             ('json files', '*.json'),
             ('All files', '*.*')
         )
-
         filename = fd.askopenfilename(
             title='Open a file',
             initialdir=self.conf_dir or '/',
             filetypes=filetypes)
         self.conf_dir = dirname(filename)
-        # filename = 'conf.json'
-        # Check stuff
         self.manager.json_conf.load_json_from_file(filename)
         self.update_lists_wd()
-        # print(self.manager.json_conf.__json)
 
     def __save_conf(self):
         filetypes = (
@@ -344,10 +304,7 @@ class tk_menu(tk.Tk):
         self.conf_dir = dirname(filename)
         # Check stuff
         self.manager.json_conf.export_json_to_file(filename)
-        print(self.manager.json_conf.json)
-        # filename = 'conf3.json'
-        # Check stuff
-        self.manager.json_conf.export_json_to_file(filename)
+
 
     def create_game_list_wd(self):
         # Drop Box
@@ -356,7 +313,6 @@ class tk_menu(tk.Tk):
         self.game_list_var.trace('w', self.__once_selected_game)
         self.game_list_wd = tk.OptionMenu(self, self.game_list_var, *[key for key in self.game_dic])
         self.game_list_wd.pack(fill=tk.Y, expand=False)
-        # self.game_list_wd.pack(fill=tk.BOTH, expand=True)
 
     def create_notes_list_wd(self, game_name):
         self.note_list_var = tk.StringVar(self)
@@ -439,3 +395,5 @@ class tk_menu(tk.Tk):
 if __name__ == '__main__':
     x = Manager(title="tk menu")
     x.start_tk()
+
+
