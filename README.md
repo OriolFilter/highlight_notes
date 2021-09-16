@@ -1,0 +1,1 @@
+Should try to improve the GUI, but sort of like actually don't want to, seems more trouble than anything, and so far, works as intended 

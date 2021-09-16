@@ -1,0 +1,22 @@
+{
+            "games": [
+                {
+                    "name": "game",
+                    "notes": [
+                        "note"
+                    ],
+                    "highlighting": [
+                        {"fore": "#hexcolor", "regex": "regex_rule"}
+                        ]
+                },
+                {
+                    "name": "game2",
+                    "notes": [
+                        "note"
+                    ],
+                    "highlighting": [
+                        {"fore": "#hexcolor", "regex": "regex_rule"}
+                        ]
+                }
+            ]
+}
