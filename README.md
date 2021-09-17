@@ -120,7 +120,7 @@ replace it with a double '\', make it look like '\\').
 - [ ] Improve GUI (but idc since it suits the function it was designed to)
 
 
-### In case someone want to share their configuration file (mainly for the highlighting), it can be added to the list of examples.
+### In case someone wants to share their configuration file (mainly for the highlighting), it can be added to the list of examples.
 
 ## Contact
 
