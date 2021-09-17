@@ -15,6 +15,9 @@
                   <Item>
                     <option name="path" value="template.json" />
                   </Item>
+                  <Item>
+                    <option name="path" value="examples/template.json" />
+                  </Item>
                 </list>
               </option>
             </SchemaInfo>

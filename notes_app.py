@@ -23,6 +23,7 @@ from tkinter import filedialog as fd
 from json import load as jload, dump as jwrite
 from os.path import dirname
 from pathlib import Path
+from sys import argv
 
 
 @dataclass
@@ -69,7 +70,6 @@ class JsonSettings:
             self.load_json_from_dic(json=json)
         else:
             self.load_json_from_dic(json=self.__defaultjson)
-
 
     def load_json_from_dic(self, json: {}):
         self.reload_conf(json=json)
@@ -286,7 +286,7 @@ class tk_menu(tk.Tk):
         )
         filename = fd.askopenfilename(
             title='Open a file',
-            initialdir=self.conf_dir or '/',
+            initialdir=self.conf_dir or str(Path.home()),
             filetypes=filetypes)
         self.conf_dir = dirname(filename)
         self.manager.json_conf.load_json_from_file(filename)
@@ -299,12 +299,11 @@ class tk_menu(tk.Tk):
         )
         filename = fd.asksaveasfilename(
             title='Save to file',
-            initialdir=self.conf_dir or '/',
+            initialdir=self.conf_dir or str(Path.home()),
             filetypes=filetypes)
         self.conf_dir = dirname(filename)
         # Check stuff
         self.manager.json_conf.export_json_to_file(filename)
-
 
     def create_game_list_wd(self):
         # Drop Box
@@ -393,7 +392,8 @@ class tk_menu(tk.Tk):
 
 
 if __name__ == '__main__':
-    x = Manager(title="tk menu")
+    default_file: str or None = None
+    if len(argv) > 1:
+        default_file = argv[1]
+    x = Manager(title="tk menu", jsonpath=default_file)
     x.start_tk()
-
-
