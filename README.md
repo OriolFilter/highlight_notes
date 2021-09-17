@@ -114,7 +114,7 @@ replace it with a double '\', make it look like '\\').
 
 ##### TODO
 
-- [ ] Comment the functions properly
+- [x] Comment the code
 - [x] Add being able to call the file from terminal specifying a file as an argument in order to automate it
 - [ ] Do some sort of error checking / data validation / output message in case things go wrong
 - [ ] Improve GUI (but idc since it suits the function it was designed to)
